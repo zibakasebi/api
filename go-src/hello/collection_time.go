@@ -1,9 +1,8 @@
-package models
+package main
 
 import (
 	"time"
 
-	"github.com/zibakasebi/api/enums"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
@@ -14,7 +13,7 @@ type CollectionTime struct {
 	StartDate time.Time
 	EndDate   time.Time
 	Ranges    []Range
-	WeekDays  []enums.WeekDay
+	WeekDays  []WeekDay
 }
 
 type Range struct {

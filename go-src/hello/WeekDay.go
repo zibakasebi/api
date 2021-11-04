@@ -1,4 +1,4 @@
-package enums
+package main
 
 //WeekDay
 type WeekDay int32
