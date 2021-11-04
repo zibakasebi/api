@@ -17,6 +17,8 @@ import (
 
 func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	name := request.QueryStringParameters["name"]
+	var dburi = os.Getenv("mongo")
+	log.Print(dburi)
 
 	// col := getClient().Database("test").Collection("test-col")
 
