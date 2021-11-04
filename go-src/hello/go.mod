@@ -1,4 +1,4 @@
-module github.com/EsmaeilMazahery/EsmaeilMazahery.github.io
+module github.com/zibakasebi/api
 
 go 1.17
 

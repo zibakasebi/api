@@ -18,8 +18,8 @@ import (
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
-func handler(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
-	name := request.QueryStringParameters["name"]
+func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
+	// name := request.QueryStringParameters["name"]
 
 	col := getClient().Database("test").Collection("test-col")
 
@@ -59,5 +59,5 @@ func getClient() *mongo.Client {
 
 func main() {
 	// Make the handler available for Remote Procedure Call by AWS Lambda
-	lambda.Start(handler)
+	lambda.Start(Handler)
 }

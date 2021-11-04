@@ -1,6 +1,7 @@
 package main
 
 import (
+	"context"
 	"log"
 	"testing"
 
@@ -29,7 +30,7 @@ func TestHandler(t *testing.T) {
 	}
 
 	for i, test := range tests {
-		response, err := handler(test.request)
+		response, err := Handler(context.Background(), test.request)
 		assert.IsType(t, test.err, err)
 		assert.Equal(t, test.expect, response.Body)
 		log.Printf("Test %d: %s", i, response.Body)

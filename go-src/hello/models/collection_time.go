@@ -3,7 +3,7 @@ package models
 import (
 	"time"
 
-	"github.com/EsmaeilMazahery/EsmaeilMazahery.github.io/enums"
+	"github.com/zibakasebi/api/enums"
 	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
