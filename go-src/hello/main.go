@@ -2,7 +2,6 @@ package main
 
 import (
 	"context"
-	"errors"
 	"fmt"
 	"log"
 	"net/http"
@@ -12,23 +11,21 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 
-	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 )
 
 func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
-	// name := request.QueryStringParameters["name"]
+	name := request.QueryStringParameters["name"]
 
-	col := getClient().Database("test").Collection("test-col")
+	// col := getClient().Database("test").Collection("test-col")
 
-	insertResult, err := col.InsertOne(ctx, bson.M{})
-	if err != nil {
-		return nil, errors.New("error")
-	}
+	// insertResult, err := col.InsertOne(ctx, bson.M{})
+	// if err != nil {
+	// 	return nil, errors.New("error")
+	// }
 
-	response := fmt.Sprintf("id : %s!", insertResult.InsertedID.(primitive.ObjectID).Hex())
+	response := fmt.Sprintf("Hello %s!", name)
 
 	return &events.APIGatewayProxyResponse{
 		StatusCode:        200,
