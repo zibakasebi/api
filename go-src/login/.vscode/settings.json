@@ -1,5 +1,8 @@
 {
   "go.testEnvVars": {
-    "mongo": "debug"
+    "mongo": "mongodb+srv://user:EP0JKPQur4rIhzP8@cluster0.as3i4.mongodb.net/test",
+    "password": "1617s1617s",
+    "username": "ziba",
+    "token": "etbu5buEJ^v3535b%e67kjb5j"
   }
 }

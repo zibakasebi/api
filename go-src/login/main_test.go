@@ -2,7 +2,10 @@ package main
 
 import (
 	"context"
+	"encoding/json"
+	"fmt"
 	"log"
+	"os"
 	"testing"
 
 	"github.com/aws/aws-lambda-go/events"
@@ -10,25 +13,38 @@ import (
 )
 
 func TestHandler(t *testing.T) {
+	var loginRequest LoginRequest
+	loginRequest.Username = os.Getenv("username")
+	loginRequest.Password = os.Getenv("password")
+	//convert struct to json
+	jsonStr, err := json.Marshal(loginRequest)
+	if err != nil {
+		t.Error("error:", err)
+	}
+
+	var token = os.Getenv("token")
+
 	tests := []struct {
-		request events.APIGatewayProxyRequest
-		expect  string
-		err     error
+		request    events.APIGatewayProxyRequest
+		expect     string
+		err        error
+		statusCode int
 	}{
 		{
-			// Test name has value
+			// Test valid login
 			request: events.APIGatewayProxyRequest{
-				QueryStringParameters: map[string]string{"name": "Paul"},
-				Body:                  "ssssss",
+				Body: string(jsonStr),
 			},
-			expect: "Hello Paul!",
-			err:    nil,
+			expect:     fmt.Sprintf(`{"token": "%s"}`, token),
+			err:        nil,
+			statusCode: 200,
 		},
 		{
-			// Test name is null
-			request: events.APIGatewayProxyRequest{},
-			expect:  "Hello !",
-			err:     nil,
+			// Test invalid login
+			request:    events.APIGatewayProxyRequest{},
+			expect:     "",
+			err:        nil,
+			statusCode: 401,
 		},
 	}
 
