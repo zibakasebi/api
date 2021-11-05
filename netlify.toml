@@ -10,5 +10,7 @@
 [[headers]]
   # Define which paths this specific [[headers]] block will cover.
   for = "/*"
-    [headers.values]
+  [headers.values]
     Access-Control-Allow-Origin = "*"
+    Access-Control-Allow-Methods = "POST, GET, OPTIONS, PUT, DELETE"
+    Access-Control-Allow-Headers = "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization"
