@@ -50,7 +50,7 @@ func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (*event
 				"Content-Type":                "application/json",
 				"access-control-allow-origin": "*",
 			},
-			Body: fmt.Sprintf(`{"token": "%s"}`, token),
+			Body: fmt.Sprintf(`{"Token": "%s"}`, token),
 		}, nil
 	} else {
 		return &events.APIGatewayProxyResponse{
