@@ -32,7 +32,8 @@ func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (*event
 		return &events.APIGatewayProxyResponse{
 			StatusCode: 200,
 			Headers: map[string]string{
-				"Content-Type": "application/json",
+				"Content-Type":                "application/json",
+				"access-control-allow-origin": "*",
 			},
 			Body: fmt.Sprintf(`{"token": "%s"}`, token),
 		}, nil
@@ -40,7 +41,8 @@ func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (*event
 		return &events.APIGatewayProxyResponse{
 			StatusCode: 401,
 			Headers: map[string]string{
-				"Content-Type": "application/json",
+				"Content-Type":                "application/json",
+				"access-control-allow-origin": "*",
 			},
 		}, nil
 	}
