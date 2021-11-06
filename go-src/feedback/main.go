@@ -54,8 +54,7 @@ func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (*event
 	}
 
 	return &events.APIGatewayProxyResponse{
-		StatusCode: 200,
-		Headers:    map[string]string{"Content-Type": "text/html; charset=UTF-8"},
+		StatusCode: 204, // no content
 	}, nil
 }
 
