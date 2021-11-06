@@ -43,7 +43,7 @@ func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (*event
 	var feedbackRequest FeedbackRequest
 	err := json.Unmarshal([]byte(request.Body), &feedbackRequest)
 	if err != nil {
-		fmt.Println("error:", err)
+		fmt.Println("error:", err, request.Body)
 	}
 
 	col := getClient().Database("test").Collection("feedback")
