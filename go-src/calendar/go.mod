@@ -1,10 +1,11 @@
-module github.com/zibakasebi/api
+module github.com/zibakasebi/api/calendar
 
 go 1.17
 
 require (
 	github.com/aws/aws-lambda-go v1.27.0
 	github.com/stretchr/testify v1.6.1
+	github.com/yaa110/go-persian-calendar v1.0.2
 	go.mongodb.org/mongo-driver v1.7.3
 )
 
