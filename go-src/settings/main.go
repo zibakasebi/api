@@ -88,7 +88,7 @@ func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (*event
 
 	if request.HTTPMethod == "GET" {
 		return HandlerGet(ctx, request)
-	} else if request.HTTPMethod == "POST" {
+	} else if request.HTTPMethod == "PUT" {
 		return HandlerEdit(ctx, request)
 	} else {
 		return &events.APIGatewayProxyResponse{
