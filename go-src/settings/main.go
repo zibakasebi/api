@@ -64,9 +64,10 @@ type Range struct {
 // 	PersianMonth string       `json:"persian_month"`
 // }
 
-func InternalServerError() (*events.APIGatewayProxyResponse, error) {
+func InternalServerError(message string) (*events.APIGatewayProxyResponse, error) {
 	return &events.APIGatewayProxyResponse{
 		StatusCode: http.StatusInternalServerError,
+		Body:       message,
 	}, nil
 }
 
@@ -105,7 +106,7 @@ func HandlerGet(ctx context.Context, request events.APIGatewayProxyRequest) (*ev
 
 	err := colSetting.FindOne(ctx, bson.M{}).Decode(&setting)
 	if err != nil && err != mongo.ErrNoDocuments {
-		return InternalServerError()
+		return InternalServerError(err.Error())
 	}
 
 	if err == mongo.ErrNoDocuments {
@@ -121,7 +122,7 @@ func HandlerGet(ctx context.Context, request events.APIGatewayProxyRequest) (*ev
 	//convert struct to json string
 	jsonSetting, err := json.Marshal(setting)
 	if err != nil {
-		return InternalServerError()
+		return InternalServerError(err.Error())
 	}
 
 	return &events.APIGatewayProxyResponse{
@@ -139,7 +140,7 @@ func HandlerEdit(ctx context.Context, request events.APIGatewayProxyRequest) (*e
 	//convert json string to struct
 	err := json.Unmarshal([]byte(request.Body), &setting)
 	if err != nil {
-		return InternalServerError()
+		return InternalServerError(err.Error())
 	}
 
 	replaceOption := options.Replace()
@@ -147,7 +148,7 @@ func HandlerEdit(ctx context.Context, request events.APIGatewayProxyRequest) (*e
 
 	_, err = colSetting.ReplaceOne(ctx, bson.M{}, setting, replaceOption)
 	if err != nil {
-		return InternalServerError()
+		return InternalServerError(err.Error())
 	}
 
 	return &events.APIGatewayProxyResponse{
