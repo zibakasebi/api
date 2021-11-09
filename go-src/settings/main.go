@@ -140,6 +140,7 @@ func HandlerEdit(ctx context.Context, request events.APIGatewayProxyRequest) (*e
 	//convert json string to struct
 	err := json.Unmarshal([]byte(request.Body), &setting)
 	if err != nil {
+		log.Print(err)
 		return InternalServerError(err.Error())
 	}
 
@@ -148,6 +149,7 @@ func HandlerEdit(ctx context.Context, request events.APIGatewayProxyRequest) (*e
 
 	_, err = colSetting.ReplaceOne(ctx, bson.M{}, setting, replaceOption)
 	if err != nil {
+		log.Print(err)
 		return InternalServerError(err.Error())
 	}
 
