@@ -133,6 +133,8 @@ func HandlerGet(ctx context.Context, request events.APIGatewayProxyRequest) (*ev
 }
 
 func HandlerEdit(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
+	log.Print("body:", request.Body)
+
 	database := getClient().Database("test")
 
 	colSetting := database.Collection("setting")
