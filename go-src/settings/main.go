@@ -70,7 +70,22 @@ func InternalServerError() (*events.APIGatewayProxyResponse, error) {
 	}, nil
 }
 
+func setupResponseCors() (*events.APIGatewayProxyResponse, error) {
+	return &events.APIGatewayProxyResponse{
+		StatusCode: 200,
+		Headers: map[string]string{
+			"Access-Control-Allow-Origin":  "*",
+			"Access-Control-Allow-Methods": "POST, GET, OPTIONS, PUT, DELETE",
+			"Access-Control-Allow-Headers": "Accept, Content-Type, Content-Length, Accept-Encoding, X-CSRF-Token, Authorization",
+		},
+	}, nil
+}
+
 func Handler(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
+	if request.HTTPMethod == "OPTIONS" {
+		return setupResponseCors()
+	}
+
 	if request.HTTPMethod == "GET" {
 		return HandlerGet(ctx, request)
 	} else if request.HTTPMethod == "POST" {
