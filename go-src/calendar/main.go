@@ -21,8 +21,6 @@ import (
 )
 
 type AppTime struct {
-	ID primitive.ObjectID `bson:"_id,omitempty"`
-
 	Name      string         `bson:"name"`
 	StartDate time.Time      `bson:"start_date"`
 	EndDate   time.Time      `bson:"end_date"`
@@ -191,17 +189,9 @@ func getClient() *mongo.Client {
 	return client
 }
 
-func HandlerTest(ctx context.Context, request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
-	return &events.APIGatewayProxyResponse{
-		StatusCode: http.StatusOK,
-		Body:       "Hello World",
-	}, nil
-}
-
 func main() {
 	// Make the handler available for Remote Procedure Call by AWS Lambda
 	lambda.Start(Handler)
-	lambda.Start(HandlerTest)
 }
 
 //get persian month from gregoian date
